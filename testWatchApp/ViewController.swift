@@ -7,19 +7,37 @@
 //
 
 import UIKit
+import CoreMotion
+
 
 class ViewController: UIViewController {
+    var motionManager = CMMotionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+                motionManager.deviceMotionUpdateInterval = 0.1
+                motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: {
+                (deviceMotion, error) -> Void in
+                        if(error == nil) {
+                            self.handleDeviceMotionUpdate(deviceMotion: deviceMotion!)
+                        } else {
+                            //handle the error
+                        }
+                })
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func handleDeviceMotionUpdate(deviceMotion:CMDeviceMotion) {
+        let attitude = deviceMotion.attitude
+        let roll = degrees(radians: attitude.roll)
+        let pitch = degrees(radians: attitude.pitch)
+        let yaw = degrees(radians: attitude.yaw)
+        print("Roll: \(roll)", "Pitch: \(pitch)", "Yaw: \(yaw)")
     }
-
-
+    
+    func degrees(radians:Double) -> Double {
+        return 180 / Double.pi * radians
+    }
 }
 

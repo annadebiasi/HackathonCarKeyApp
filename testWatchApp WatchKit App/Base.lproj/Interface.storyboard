@@ -16,18 +16,55 @@
                     <items>
                         <group width="136" height="64" alignment="left" id="8Ig-ge-3LA">
                             <items>
-                                <button width="0.5" height="59" alignment="left" backgroundImage="try again" id="vYk-73-Vtq"/>
+                                <button width="68" height="59" alignment="left" backgroundImage="try again" id="vYk-73-Vtq"/>
                                 <button width="0.5" height="69" alignment="left" backgroundImage="unlock" id="3jX-H5-Zkf"/>
                             </items>
                         </group>
-                        <button width="1" alignment="left" title="Locate" id="cYc-Ri-B3j"/>
-                        <button width="1" alignment="left" title="Secure" id="mAS-FC-PMn"/>
-                        <button width="1" alignment="left" title="My Climate" id="8P8-F4-JUo"/>
-                        <button width="1" alignment="left" title="My Radio" id="Jp5-JS-3OB"/>
+                        <button width="1" alignment="left" title="Locate" id="cYc-Ri-B3j">
+                            <connections>
+                                <segue destination="bWi-mg-8b8" kind="push" id="Hrf-dP-OKW"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Secure" id="mAS-FC-PMn">
+                            <connections>
+                                <segue destination="Mrx-tP-Oa8" kind="push" id="uU5-HG-oOv"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="My Climate" id="8P8-F4-JUo">
+                            <connections>
+                                <segue destination="DNk-lU-lMC" kind="push" id="dVH-eK-6Xw"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="My Radio" id="Jp5-JS-3OB">
+                            <connections>
+                                <segue destination="KDw-AT-JWG" kind="push" id="PEf-p8-3Xo"/>
+                            </connections>
+                        </button>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="914" y="-697.5"/>
+            <point key="canvasLocation" x="892" y="-884.5"/>
+        </scene>
+        <!--Choose View-->
+        <scene sceneID="pik-UA-3Ww">
+            <objects>
+                <controller identifier="Choose View" id="bWi-mg-8b8">
+                    <items>
+                        <label width="136" alignment="left" text="Choose View" textAlignment="center" id="1v6-fQ-vuM"/>
+                        <button width="1" alignment="left" title="Map" id="Ccb-VL-v8c">
+                            <connections>
+                                <segue destination="ryv-Yk-sKl" kind="push" id="rxd-me-Piv"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Arrow" id="7eH-GW-bgz">
+                            <connections>
+                                <segue destination="G6h-Bz-zyC" kind="push" id="Zax-bT-hSd"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="504" y="-420"/>
         </scene>
         <!--Driver Climate-->
         <scene sceneID="ZfN-Ah-sSo">
@@ -51,7 +88,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="914" y="-336"/>
+            <point key="canvasLocation" x="914" y="-405"/>
         </scene>
         <!--Interface Controller-->
         <scene sceneID="Xvh-Nr-9MO">
@@ -66,10 +103,10 @@
             </objects>
             <point key="canvasLocation" x="1259" y="-359"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Secure-->
         <scene sceneID="kP4-qw-cIb">
             <objects>
-                <controller id="Mrx-tP-Oa8">
+                <controller identifier="Secure" id="Mrx-tP-Oa8">
                     <items>
                         <label width="136" height="20" alignment="left" text="Your car is secure!" textAlignment="center" id="LCj-Ae-wpK"/>
                         <button width="1" alignment="left" title="Set Alert Me" id="HIi-XU-w73"/>
@@ -81,12 +118,12 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1633" y="-351"/>
+            <point key="canvasLocation" x="1659" y="-462"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Add Drivers-->
         <scene sceneID="Vac-6o-C90">
             <objects>
-                <controller id="5nf-5S-CF8">
+                <controller identifier="Add Drivers" id="5nf-5S-CF8">
                     <items>
                         <button width="1" alignment="left" title="Me" id="Vai-3j-O3i"/>
                         <button width="1" alignment="left" title="Mom" id="q8G-0p-j5r"/>
@@ -120,7 +157,7 @@
         <!--Map Location-->
         <scene sceneID="qLF-a8-xg3">
             <objects>
-                <controller title="Map Location" id="ryv-Yk-sKl">
+                <controller title="Map Location" id="ryv-Yk-sKl" customClass="Maps" customModule="testWatchApp_WatchKit_Extension">
                     <items>
                         <label width="136" alignment="left" text="10:24 ETA" textAlignment="center" id="acA-qJ-Pdk"/>
                         <map height="100" alignment="left" id="wG7-ZL-ccb"/>
@@ -132,16 +169,16 @@
                         </group>
                     </items>
                     <connections>
-                        <segue destination="G6h-Bz-zyC" kind="relationship" relationship="nextPage" id="trd-6c-7Qf"/>
+                        <outlet property="map" destination="wG7-ZL-ccb" id="09T-mw-fZl"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="597" y="-329"/>
+            <point key="canvasLocation" x="262" y="-17"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Arrow-->
         <scene sceneID="3fX-aM-dd4">
             <objects>
-                <controller id="G6h-Bz-zyC">
+                <controller identifier="Arrow" id="G6h-Bz-zyC">
                     <items>
                         <label width="136" alignment="left" text="10:24 ETA" textAlignment="center" id="4MA-ZG-nS7"/>
                         <group width="1" height="73" alignment="left" id="HFO-VP-TcZ">
@@ -159,29 +196,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="606" y="-10"/>
-        </scene>
-        <!--Static Notification Interface Controller-->
-        <scene sceneID="AEw-b0-oYE">
-            <objects>
-                <notificationController id="YCC-NB-fut">
-                    <items>
-                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
-                    </items>
-                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
-                    <connections>
-                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
-                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
-                    </connections>
-                </notificationController>
-            </objects>
-            <point key="canvasLocation" x="220" y="643"/>
-        </scene>
-        <!--Notification Controller-->
-        <scene sceneID="ZPc-GJ-vnh">
-            <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="testWatchApp_WatchKit_App" customModuleProvider="target"/>
-            </objects>
-            <point key="canvasLocation" x="468" y="643"/>
         </scene>
     </scenes>
 </document>
