@@ -7,37 +7,28 @@
 //
 
 import UIKit
-import CoreMotion
+import CoreLocation
 
-
-class ViewController: UIViewController {
-    var motionManager = CMMotionManager()
-
+class ViewController: UIViewController, CLLocationManagerDelegate {
+    var locationManager:CLLocationManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-                motionManager.deviceMotionUpdateInterval = 0.1
-                motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: {
-                (deviceMotion, error) -> Void in
-                        if(error == nil) {
-                            self.handleDeviceMotionUpdate(deviceMotion: deviceMotion!)
-                        } else {
-                            //handle the error
-                        }
-                })
+           if (CLLocationManager.headingAvailable()) {
+    
+                locationManager  = CLLocationManager()
+                locationManager.delegate = self
+                locationManager.startUpdatingHeading()
+        }
+
     }
+    
+    internal func locationManager(_ manager: CLLocationManager, didUpdateHeading heading: CLHeading) {
+        // This will print out the direction the device is heading
+        print(heading.trueHeading) }
 
     
-    func handleDeviceMotionUpdate(deviceMotion:CMDeviceMotion) {
-        let attitude = deviceMotion.attitude
-        let roll = degrees(radians: attitude.roll)
-        let pitch = degrees(radians: attitude.pitch)
-        let yaw = degrees(radians: attitude.yaw)
-        print("Roll: \(roll)", "Pitch: \(pitch)", "Yaw: \(yaw)")
-    }
-    
-    func degrees(radians:Double) -> Double {
-        return 180 / Double.pi * radians
-    }
+    // https://www.quora.com/How-do-I-create-a-simple-compass-iOS-app-with-Swift-2-1-using-image-view-and-accelerometer
 }
 

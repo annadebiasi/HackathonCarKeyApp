@@ -9,50 +9,16 @@
 
 import WatchKit
 import Foundation
-import CoreMotion
 import CoreLocation
 
 class Maps: WKInterfaceController, CLLocationManagerDelegate {
-    
+
     @IBOutlet var map: WKInterfaceMap!
     
-    let manager = CLLocationManager()
-    var motionManager = CMMotionManager()
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locations = locations[0]
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(locations.coordinate.latitude, locations.coordinate.longitude)
-        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-        map.setRegion(region)
-    }
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
-        manager.delegate = self
-        manager.desiredAccuracy =  kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-        
-        var x = 0.0
-        var y = 0.0
-        var z = 0.0
 
-        
-        
-        motionManager.gyroUpdateInterval = 0.2
-        motionManager.startGyroUpdates(to: OperationQueue.current!){  (data,error) in
-            if let myData = data{
-                x += myData.rotationRate.x
-                y += myData.rotationRate.y
-                z += myData.rotationRate.z
-                print( "x ", x, " y ", y, " z ", z)
-            }
-
-        }
-
-        // Configure interface objects here.
     }
     
     override func willActivate() {
