@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CocoaMQTT
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager:CLLocationManager!
