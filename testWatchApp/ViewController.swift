@@ -20,17 +20,16 @@ class ViewController: UIViewController,WCSessionDelegate, CLLocationManagerDeleg
 
     var temperature: String = ""
     
-    
-    
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
        
         if((applicationContext["temp"]) != nil){
             temperature = (applicationContext["temp"] as? String)!
-            mqttClient.publish("rpi/temp", withString: temperature)
+            print(temperature)
+            mqttClient.publish("temp", withString: temperature)
         }
         if((applicationContext["music"]) != nil){
             temperature = (applicationContext["music"] as? String)!
-            mqttClient.publish("rpi/temp", withString: temperature)
+            mqttClient.publish("music", withString: temperature)
         }
         if((applicationContext["Lock Status"]) != nil){
             temperature = (applicationContext["Lock Status"] as? String)!
@@ -38,12 +37,6 @@ class ViewController: UIViewController,WCSessionDelegate, CLLocationManagerDeleg
         }
     }
     
-    
-
-    //var headingManager:CLLocationManager!
-   // var locationManager  = CLLocationManager()
-   
-
     override func viewDidLoad() {
         super.viewDidLoad()
         if (WCSession.isSupported()) {
@@ -51,6 +44,10 @@ class ViewController: UIViewController,WCSessionDelegate, CLLocationManagerDeleg
             session?.delegate = self
             session?.activate()
         }
+        
+//var headingManager:CLLocationManager!
+// var locationManager  = CLLocationManager()
+
 //        UserDefaults.standard.set([39.509,-124.345], forKey: "parking")
 //        // Ask for Authorisation from the User.
 //        self.locationManager.requestAlwaysAuthorization()

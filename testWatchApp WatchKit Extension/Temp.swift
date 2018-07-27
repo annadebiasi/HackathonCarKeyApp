@@ -17,35 +17,38 @@ class Temp: WKInterfaceController {
     let session = WCSession.default
 
     @IBOutlet var temp: WKInterfaceLabel!
-    
     @IBOutlet var tempSet: WKInterfaceLabel!
+    
+    // Raises temperature by one degrees
     @IBAction func plus() {
+        // Notifies user that the temp was set
         if(tempSet.description == "Not Set"){
             tempSet.setText("Set")
         }
         if(temp.description != "60" && temp.description != "80"){
-            temp.setText(String(Int(temp.description)! + 1))
             if( WCSession.default.isReachable){
+                temp.setText(String(Int(temp.description)! + 1))
                 WCSession.default.sendMessage(["temp":temp.description] , replyHandler: nil)
             }
         }
     }
-   
+    
+    // Lowers temperature by one degrees
     @IBAction func minus() {
+        // Notifies user that the temp was set
         if(tempSet.description == "Not Set"){
             tempSet.setText("Set")
         }
         if(temp.description != "60" && temp.description != "80"){
-            temp.setText(String(Int(temp.description)! - 1))
             if( WCSession.default.isReachable){
+                temp.setText(String(Int(temp.description)! - 1))
                 WCSession.default.sendMessage(["temp":temp.description] , replyHandler: nil)
             }
         }
     }
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        temp.setText(String(75))
-        
         session.delegate = self as? WCSessionDelegate
         session.activate()
     }

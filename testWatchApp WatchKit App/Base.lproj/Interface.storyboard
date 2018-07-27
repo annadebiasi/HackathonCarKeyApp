@@ -14,10 +14,18 @@
             <objects>
                 <controller title="Homepage" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="testWatchApp_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="136" height="64" alignment="left" id="8Ig-ge-3LA">
+                        <group width="136" height="63" alignment="left" id="8Ig-ge-3LA">
                             <items>
-                                <button width="68" height="59" alignment="left" backgroundImage="try again" id="vYk-73-Vtq"/>
-                                <button width="0.5" height="69" alignment="left" backgroundImage="unlock" id="3jX-H5-Zkf"/>
+                                <button width="66" height="59" alignment="left" backgroundImage="try again" id="vYk-73-Vtq">
+                                    <connections>
+                                        <action selector="unlock" destination="AgC-eL-Hgc" id="plS-Ek-m1T"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" height="69" alignment="left" backgroundImage="unlock" id="3jX-H5-Zkf">
+                                    <connections>
+                                        <action selector="lock" destination="AgC-eL-Hgc" id="dGh-0e-mwB"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                         <button width="1" alignment="left" title="Locate" id="cYc-Ri-B3j">
@@ -41,9 +49,13 @@
                             </connections>
                         </button>
                     </items>
+                    <connections>
+                        <outlet property="lockButton" destination="3jX-H5-Zkf" id="0su-Yu-zfV"/>
+                        <outlet property="unlockButton" destination="vYk-73-Vtq" id="7xU-bp-jcL"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="892" y="-884.5"/>
+            <point key="canvasLocation" x="892" y="-885"/>
         </scene>
         <!--Choose View-->
         <scene sceneID="pik-UA-3Ww">
@@ -73,19 +85,20 @@
                     <items>
                         <label alignment="left" text="Driver" id="Y11-b9-MtS"/>
                         <label width="136" alignment="left" id="i7Y-zQ-sIh"/>
-                        <group width="134" height="42" alignment="left" id="40l-ij-Ma9">
+                        <group width="135" height="45" alignment="left" id="CNW-Z6-uES">
                             <items>
-                                <button alignment="left" backgroundImage="minus" id="lzv-ra-pme">
+                                <button width="47" height="44" alignment="left" backgroundImage="minus" id="NHJ-dp-bOI">
                                     <connections>
-                                        <action selector="minus" destination="DNk-lU-lMC" id="dfX-3l-uzv"/>
+                                        <action selector="minus" destination="DNk-lU-lMC" id="NSR-FW-iOc"/>
                                     </connections>
                                 </button>
-                                <label width="52" height="39" alignment="left" text="75 F" textAlignment="center" id="CXz-vx-vRO">
+                                <label width="22" height="38" alignment="left" text="75 " textAlignment="center" id="obG-UB-fvh">
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
-                                <button width="38" height="39" alignment="left" backgroundImage="plus" id="afK-mb-y2s">
+                                <label width="13" height="38" alignment="left" text="F" id="8J6-5c-sHj"/>
+                                <button width="45" height="48" alignment="left" backgroundImage="plus" id="HZ5-wq-aZu">
                                     <connections>
-                                        <action selector="plus" destination="DNk-lU-lMC" id="BX0-hm-Rvk"/>
+                                        <action selector="plus" destination="DNk-lU-lMC" id="uSK-Oa-h1I"/>
                                     </connections>
                                 </button>
                             </items>
@@ -93,25 +106,50 @@
                         <label width="136" alignment="left" text="Not Set" textAlignment="center" id="PL7-9k-opD"/>
                     </items>
                     <connections>
-                        <outlet property="temp" destination="CXz-vx-vRO" id="4Li-UV-oED"/>
+                        <outlet property="temp" destination="obG-UB-fvh" id="aPr-QW-1SZ"/>
                         <outlet property="tempSet" destination="PL7-9k-opD" id="JUV-pW-ET7"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="914" y="-405"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Music-->
         <scene sceneID="Xvh-Nr-9MO">
             <objects>
-                <controller id="KDw-AT-JWG">
+                <controller id="KDw-AT-JWG" userLabel="Music" customClass="Music" customModule="testWatchApp_WatchKit_Extension">
                     <items>
-                        <picker height="63" alignment="left" id="FXy-g7-VGl"/>
-                        <picker height="53" alignment="left" id="w3o-X2-8Wy"/>
-                        <button width="1" alignment="left" title="Set" id="VpK-zm-KO2"/>
+                        <group width="136" height="26" alignment="left" id="5fY-XF-sxy">
+                            <items>
+                                <label width="64" height="29" alignment="left" text="88" textAlignment="right" id="DJc-D3-PjD">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label width="29" height="30" alignment="left" text=" FM" id="H82-hZ-XFT"/>
+                            </items>
+                        </group>
+                        <group width="136" height="52" alignment="left" id="SC7-Vl-56z">
+                            <items>
+                                <label width="11" height="50" alignment="left" id="hxz-i2-2m8"/>
+                                <button width="53" height="49" alignment="left" backgroundImage="minus" id="Z0P-04-WBg">
+                                    <connections>
+                                        <action selector="minus" destination="KDw-AT-JWG" id="KAQ-1b-kR3"/>
+                                    </connections>
+                                </button>
+                                <button width="49" height="48" alignment="left" backgroundImage="plus" id="r70-Ve-Y3n">
+                                    <connections>
+                                        <action selector="plus" destination="KDw-AT-JWG" id="5jD-mm-6a4"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <label width="136" alignment="left" text="Not Set" textAlignment="center" id="hJd-0D-XXj"/>
                     </items>
+                    <connections>
+                        <outlet property="musicStation" destination="DJc-D3-PjD" id="tZe-AR-sMd"/>
+                        <outlet property="tempSet" destination="hJd-0D-XXj" id="T82-eI-nej"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1259" y="-359"/>
+            <point key="canvasLocation" x="1259" y="-360"/>
         </scene>
         <!--Secure-->
         <scene sceneID="kP4-qw-cIb">
