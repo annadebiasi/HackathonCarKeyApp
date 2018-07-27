@@ -12,24 +12,28 @@ import WatchConnectivity
 import UIKit
 
 class InterfaceController: WKInterfaceController {
-   
+    
+
     var lockStatus = "none"
+    let session = WCSession.default
     
 //    @IBOutlet var unlockButton: WKInterfaceButton!
 //    @IBOutlet var lockButton: WKInterfaceButton!
     @IBAction func unlock() {
-        if (lockStatus != "unlock"){
-            lockStatus = "unlock"
+//        if (lockStatus != "unlock"){
+//            lockStatus = "unlock"
             //self.unlockButton.setBackgroundColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-            if( WCSession.default.isReachable){
-                WCSession.default.sendMessage(["Lock Status":"Unlock"] , replyHandler: nil)
-            }
-        }
-        else{
-            lockStatus = "none"
-          //  self.unlockButton.setBackgroundColor(#colorLiteral(red: 0.9727308783, green: 0.9879265731, blue: 1, alpha: 0))
-        }
+        
+        
+        session.sendMessage(["Lock Status":"Unlock"], replyHandler: nil, errorHandler: { error in
+            print("Error sending message ",error)
+            })
     }
+//        else{
+//            lockStatus = "none"
+//          //  self.unlockButton.setBackgroundColor(#colorLiteral(red: 0.9727308783, green: 0.9879265731, blue: 1, alpha: 0))
+//        }
+//    }
     
     @IBAction func lock() {
         if (lockStatus != "lock"){
@@ -45,11 +49,16 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
-    
-    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
+//        session.delegate = self as WCSessionDelegate
+//        session.activate()
+        if WCSession.isSupported() {
+            print("WCSession supported")
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
         // Configure interface objects here.
     }
     
@@ -65,5 +74,10 @@ class InterfaceController: WKInterfaceController {
 
 }
 
+extension InterfaceController: WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
+    
+    
+}
 
 

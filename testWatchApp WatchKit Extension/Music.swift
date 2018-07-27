@@ -13,44 +13,51 @@ import WatchConnectivity
 
 class Music: WKInterfaceController {
     
-    var watchSession : WCSession?
-
+    var session : WCSession?
     @IBOutlet var musicStation: WKInterfaceLabel!
     @IBOutlet var tempSet: WKInterfaceLabel!
     
+    
     @IBAction func minus() {
-
         // Notifies user that the temp was set
         if(tempSet.description == "Not Set"){
             tempSet.setText("Set")
         }
+        
         if(musicStation.description != "88" && musicStation.description != "107"){
-            if( WCSession.default.isReachable){
+            if (session?.isReachable)! {
                 musicStation.setText(String(Double(musicStation.description)! - 0.1))
-                WCSession.default.sendMessage(["music":musicStation.description] , replyHandler: nil)
+                session?.sendMessage(["music":musicStation.description], replyHandler: nil, errorHandler: { error in
+                print("Error sending message",error)
+                })
             }
         }
     }
-
+    
     @IBAction func plus() {
         // Notifies user that the temp was set
         if(tempSet.description == "Not Set"){
             tempSet.setText("Set")
         }
+        
         if(musicStation.description != "88" && musicStation.description != "107"){
-            if( WCSession.default.isReachable){
+            if( session?.isReachable)!{
+                print("HEYYPOOO")
                 musicStation.setText(String(Double(musicStation.description)! + 0.1))
-                WCSession.default.sendMessage(["music":musicStation.description] , replyHandler: nil)
+                //session?.sendMessage(["music":musicStation.description] , replyHandler: nil, errorHandler: { error in
+                  //  print("Error sending message",error)
+             //   })
             }
         }
     }
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        if(WCSession.isSupported()){
-            watchSession = WCSession.default
-            watchSession!.delegate = self as? WCSessionDelegate
-            watchSession!.activate()
+        if WCSession.isSupported() {
+            print("WCSession supported")
+            session = WCSession.default
+            session!.delegate = self as WCSessionDelegate
+            session!.activate()
         }
         // Configure interface objects here.
     }
@@ -58,12 +65,14 @@ class Music: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-     
     }
-    
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-    
 }
+
+extension Music: WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {}
+}
+

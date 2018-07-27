@@ -25,15 +25,16 @@ class ViewController: UIViewController,WCSessionDelegate, CLLocationManagerDeleg
         if((applicationContext["temp"]) != nil){
             temperature = (applicationContext["temp"] as? String)!
             print(temperature)
-            mqttClient.publish("temp", withString: temperature)
+            //mqttClient.publish("temp", withString: temperature)
         }
         if((applicationContext["music"]) != nil){
             temperature = (applicationContext["music"] as? String)!
-            mqttClient.publish("music", withString: temperature)
+            //mqttClient.publish("music", withString: temperature)
         }
         if((applicationContext["Lock Status"]) != nil){
             temperature = (applicationContext["Lock Status"] as? String)!
-            mqttClient.publish("rpi/temp", withString: temperature)
+            print("LOOOCOOCOCOCCCCCCKKKK")
+           // mqttClient.publish("rpi/temp", withString: temperature)
         }
     }
     
@@ -78,9 +79,10 @@ class ViewController: UIViewController,WCSessionDelegate, CLLocationManagerDeleg
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
     
+    
+    
     func sessionDidBecomeInactive(_ session: WCSession) {
     }
-    
     func sessionDidDeactivate(_ session: WCSession) {
     }
 

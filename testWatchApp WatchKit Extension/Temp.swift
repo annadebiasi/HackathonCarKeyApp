@@ -26,9 +26,9 @@ class Temp: WKInterfaceController {
             tempSet.setText("Set")
         }
         if(temp.description != "60" && temp.description != "80"){
-            if( WCSession.default.isReachable){
+            if( session.isReachable){
                 temp.setText(String(Int(temp.description)! + 1))
-                WCSession.default.sendMessage(["temp":temp.description] , replyHandler: nil)
+                session.sendMessage(["temp":temp.description] , replyHandler: nil)
             }
         }
     }
@@ -42,7 +42,7 @@ class Temp: WKInterfaceController {
         if(temp.description != "60" && temp.description != "80"){
             if( WCSession.default.isReachable){
                 temp.setText(String(Int(temp.description)! - 1))
-                WCSession.default.sendMessage(["temp":temp.description] , replyHandler: nil)
+                session.sendMessage(["temp":temp.description] , replyHandler: nil)
             }
         }
     }
