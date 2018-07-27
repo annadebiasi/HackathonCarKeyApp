@@ -36,7 +36,7 @@
 		<string>MKDirectionsModeBike</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Hello</string>
+	<string>Allow Location Access</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

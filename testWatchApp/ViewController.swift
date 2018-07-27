@@ -10,24 +10,36 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-    var locationManager:CLLocationManager!
+    //var headingManager:CLLocationManager!
+    var locationManager  = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserDefaults.standard.set([39.509,-124.345], forKey: "parking")
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
         
-           if (CLLocationManager.headingAvailable()) {
-    
-                locationManager  = CLLocationManager()
-                locationManager.delegate = self
-                locationManager.startUpdatingHeading()
-        }
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
 
+        if (CLLocationManager.headingAvailable() && CLLocationManager.locationServicesEnabled()) {
+            locationManager.delegate = self
+            locationManager.startUpdatingHeading()
+            //locationManager.stopUpdatingHeading()
+
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+         //   locationManager.startUpdatingLocation()
+        }
+    }
+    
+    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        //print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     internal func locationManager(_ manager: CLLocationManager, didUpdateHeading heading: CLHeading) {
-        // This will print out the direction the device is heading
-        print(heading.trueHeading) }
-
+      //  print(heading.trueHeading)
+    }
     
     // https://www.quora.com/How-do-I-create-a-simple-compass-iOS-app-with-Swift-2-1-using-image-view-and-accelerometer
 }
