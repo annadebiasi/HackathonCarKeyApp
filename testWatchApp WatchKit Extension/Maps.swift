@@ -15,20 +15,22 @@ import UIKit
 import MapKit
 
 class Maps: WKInterfaceController, CLLocationManagerDelegate {
-    
+    // creates instance of location
     let locationManager:CLLocationManager = CLLocationManager()
     var currentLocation = CLLocation()
+    
+    // initializes parking location coordinates
     var parkingLocation : Array<Double> = [37.424739, -122.109551]
     
-    @IBOutlet var map: WKInterfaceMap!
+    @IBAction func mapView() {
 
-    @IBAction func start() {
-        
+        // gets coordinates in degress
         let latitude:CLLocationDegrees =  parkingLocation[0]
         let longitude:CLLocationDegrees =  parkingLocation[1]
         let regionDistance:CLLocationDistance = 10000
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        //
         let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)] as [String : Any]
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem2 = MKMapItem(placemark: placemark)
@@ -42,14 +44,7 @@ class Maps: WKInterfaceController, CLLocationManagerDelegate {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
         UserDefaults.standard.set(parkingLocation, forKey: "parking")
-        
-        let locValue = CLLocationCoordinate2D(latitude: 37.424739, longitude: -122.109551)
-        let areaSpan:MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
-        let areaRegion:MKCoordinateRegion = MKCoordinateRegionMake(locValue, areaSpan)
-        self.map.setRegion(areaRegion)
-        self.map.addAnnotation(locValue, with: .red)
         
     }
     
