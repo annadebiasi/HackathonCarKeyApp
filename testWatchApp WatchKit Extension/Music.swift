@@ -1,71 +1,69 @@
 //
-//  Temp.swift
+//  Music.swift
 //  testWatchApp WatchKit Extension
 //
 //  Created by De biasi, Anna (A.) on 7/27/18.
 //  Copyright © 2018 Low, Makena (M.). All rights reserved.
 //
 
-
 import WatchKit
 import Foundation
 import WatchConnectivity
 
 
-class Temp: WKInterfaceController {
+class Music: WKInterfaceController {
     
-    let session = WCSession.default
+    var watchSession : WCSession?
 
-    @IBOutlet var temp: WKInterfaceLabel!
+    @IBOutlet var musicStation: WKInterfaceLabel!
     @IBOutlet var tempSet: WKInterfaceLabel!
     
-    // Raises temperature by one degrees
+    @IBAction func minus() {
+
+        // Notifies user that the temp was set
+        if(tempSet.description == "Not Set"){
+            tempSet.setText("Set")
+        }
+        if(musicStation.description != "88" && musicStation.description != "107"){
+            if( WCSession.default.isReachable){
+                musicStation.setText(String(Double(musicStation.description)! - 0.1))
+                WCSession.default.sendMessage(["music":musicStation.description] , replyHandler: nil)
+            }
+        }
+    }
+
     @IBAction func plus() {
         // Notifies user that the temp was set
         if(tempSet.description == "Not Set"){
             tempSet.setText("Set")
         }
-        if(temp.description != "60" && temp.description != "80"){
+        if(musicStation.description != "88" && musicStation.description != "107"){
             if( WCSession.default.isReachable){
-                temp.setText(String(Int(temp.description)! + 1))
-                WCSession.default.sendMessage(["temp":temp.description] , replyHandler: nil)
+                musicStation.setText(String(Double(musicStation.description)! + 0.1))
+                WCSession.default.sendMessage(["music":musicStation.description] , replyHandler: nil)
             }
         }
     }
-    
-    // Lowers temperature by one degrees
-    @IBAction func minus() {
-        // Notifies user that the temp was set
-        if(tempSet.description == "Not Set"){
-            tempSet.setText("Set")
-        }
-        if(temp.description != "60" && temp.description != "80"){
-            if( WCSession.default.isReachable){
-                temp.setText(String(Int(temp.description)! - 1))
-                WCSession.default.sendMessage(["temp":temp.description] , replyHandler: nil)
-            }
-        }
-    }
-    
+
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        session.delegate = self as? WCSessionDelegate
-        session.activate()
+        if(WCSession.isSupported()){
+            watchSession = WCSession.default
+            watchSession!.delegate = self as? WCSessionDelegate
+            watchSession!.activate()
+        }
+        // Configure interface objects here.
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+     
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-    
-//    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { }
-    
-    
-  
     
 }

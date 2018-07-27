@@ -18,7 +18,7 @@ class ViewController: UIViewController,WCSessionDelegate, CLLocationManagerDeleg
     
     var session: WCSession?
 
-    var temperature: String = ""
+    var temperature: String = " "
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
        

@@ -49,10 +49,6 @@
                             </connections>
                         </button>
                     </items>
-                    <connections>
-                        <outlet property="lockButton" destination="3jX-H5-Zkf" id="0su-Yu-zfV"/>
-                        <outlet property="unlockButton" destination="vYk-73-Vtq" id="7xU-bp-jcL"/>
-                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="892" y="-885"/>

@@ -15,6 +15,7 @@ import UIKit
 import MapKit
 
 class Maps: WKInterfaceController, CLLocationManagerDelegate {
+   
     // creates instance of location
     let locationManager:CLLocationManager = CLLocationManager()
     var currentLocation = CLLocation()
@@ -61,14 +62,6 @@ class Maps: WKInterfaceController, CLLocationManagerDelegate {
         // requesting authorization for location use
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
-        
-//        if (CLLocationManager.locationServicesEnabled()) {
-//            self.locationManager.delegate = self
-//            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//            self.locationManager.startUpdatingLocation()
-//        }
-       
-       
     }
     
     override func didDeactivate() {
@@ -76,9 +69,4 @@ class Maps: WKInterfaceController, CLLocationManagerDelegate {
         super.didDeactivate()
     }
     
-//    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-//       // print("locations = \(locValue.latitude) \(locValue.longitude)")
-//        parkingLocation = UserDefaults.standard.array(forKey: "parking") as! Array<Double>
-//    }
 }
