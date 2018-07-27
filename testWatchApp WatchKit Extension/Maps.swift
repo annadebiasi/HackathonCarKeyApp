@@ -1,3 +1,4 @@
+
 //
 //  Maps.swift
 //  testWatchApp WatchKit Extension
@@ -10,36 +11,62 @@
 import WatchKit
 import Foundation
 import CoreLocation
+import UIKit
+import MapKit
 
 class Maps: WKInterfaceController, CLLocationManagerDelegate {
-
-    @IBOutlet var map: WKInterfaceMap!
+    
     let locationManager:CLLocationManager = CLLocationManager()
     var currentLocation = CLLocation()
-    var parkingLocation : Array<Double> = []
-  
+    var parkingLocation : Array<Double> = [37.424739, -122.109551]
+    
+    @IBOutlet var map: WKInterfaceMap!
+
+    @IBAction func start() {
+        
+        let latitude:CLLocationDegrees =  parkingLocation[0]
+        let longitude:CLLocationDegrees =  parkingLocation[1]
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)] as [String : Any]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem2 = MKMapItem(placemark: placemark)
+        let mapItem1 = MKMapItem.forCurrentLocation()
+        mapItem2.name = "Car"
+        let mapItems = [mapItem1, mapItem2]
+
+        MKMapItem.openMaps(with: mapItems, launchOptions: options)
+      
+  }
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        UserDefaults.standard.set([39.509,-124.345], forKey: "parking")
+        UserDefaults.standard.set(parkingLocation, forKey: "parking")
         
-        // Ask for Authorisation from the User.
-        self.locationManager.requestAlwaysAuthorization()
+        let locValue = CLLocationCoordinate2D(latitude: 37.424739, longitude: -122.109551)
+        let areaSpan:MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
+        let areaRegion:MKCoordinateRegion = MKCoordinateRegionMake(locValue, areaSpan)
+        self.map.setRegion(areaRegion)
+        self.map.addAnnotation(locValue, with: .red)
         
-        // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if (CLLocationManager.locationServicesEnabled()) {
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager.startUpdatingLocation()
+        }
+       
+       
     }
     
     override func didDeactivate() {
@@ -47,16 +74,9 @@ class Maps: WKInterfaceController, CLLocationManagerDelegate {
         super.didDeactivate()
     }
     
-    
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+       // print("locations = \(locValue.latitude) \(locValue.longitude)")
         parkingLocation = UserDefaults.standard.array(forKey: "parking") as! Array<Double>
-      
-       // let locations = locations[0]
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(locValue.latitude, locValue.longitude)
-        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-        map.setRegion(region)
     }
 }

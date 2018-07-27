@@ -160,16 +160,19 @@
                 <controller title="Map Location" id="ryv-Yk-sKl" customClass="Maps" customModule="testWatchApp_WatchKit_Extension">
                     <items>
                         <label width="136" alignment="left" text="10:24 ETA" textAlignment="center" id="acA-qJ-Pdk"/>
-                        <map height="100" alignment="left" id="wG7-ZL-ccb"/>
+                        <map height="100" alignment="left" isAccessibilityElement="YES" id="wG7-ZL-ccb"/>
                         <group width="1" alignment="left" id="J48-eF-zqk">
                             <items>
-                                <button width="0.5" alignment="left" title="Clear" id="2CC-Bj-9Ci"/>
-                                <button width="0.5" alignment="left" title="Start" id="F3W-eB-h2h"/>
+                                <button width="136" alignment="left" title="Start" id="F3W-eB-h2h">
+                                    <connections>
+                                        <action selector="start" destination="ryv-Yk-sKl" id="VSo-fP-K0E"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="map" destination="wG7-ZL-ccb" id="09T-mw-fZl"/>
+                        <outlet property="map" destination="wG7-ZL-ccb" id="B2p-w8-xI2"/>
                     </connections>
                 </controller>
             </objects>
