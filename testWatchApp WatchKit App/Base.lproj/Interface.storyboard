@@ -48,12 +48,12 @@
         <!--Choose View-->
         <scene sceneID="pik-UA-3Ww">
             <objects>
-                <controller identifier="Choose View" id="bWi-mg-8b8">
+                <controller identifier="Choose View" id="bWi-mg-8b8" customClass="Maps" customModule="testWatchApp_WatchKit_Extension">
                     <items>
                         <label width="136" alignment="left" text="Choose View" textAlignment="center" id="1v6-fQ-vuM"/>
                         <button width="1" alignment="left" title="Map" id="Ccb-VL-v8c">
                             <connections>
-                                <segue destination="ryv-Yk-sKl" kind="push" id="rxd-me-Piv"/>
+                                <action selector="mapView" destination="bWi-mg-8b8" id="Pym-72-yYQ"/>
                             </connections>
                         </button>
                         <button width="1" alignment="left" title="Arrow" id="7eH-GW-bgz">
@@ -153,27 +153,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="914" y="-10"/>
-        </scene>
-        <!--Map Location-->
-        <scene sceneID="qLF-a8-xg3">
-            <objects>
-                <controller title="Map Location" id="ryv-Yk-sKl" customClass="Maps" customModule="testWatchApp_WatchKit_Extension">
-                    <items>
-                        <label width="136" alignment="left" text="10:24 ETA" textAlignment="center" id="acA-qJ-Pdk"/>
-                        <map height="100" alignment="left" id="wG7-ZL-ccb"/>
-                        <group width="1" alignment="left" id="J48-eF-zqk">
-                            <items>
-                                <button width="0.5" alignment="left" title="Clear" id="2CC-Bj-9Ci"/>
-                                <button width="0.5" alignment="left" title="Start" id="F3W-eB-h2h"/>
-                            </items>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="map" destination="wG7-ZL-ccb" id="09T-mw-fZl"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="262" y="-17"/>
         </scene>
         <!--Arrow-->
         <scene sceneID="3fX-aM-dd4">
