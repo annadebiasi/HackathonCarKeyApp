@@ -69,22 +69,32 @@
         <!--Driver Climate-->
         <scene sceneID="ZfN-Ah-sSo">
             <objects>
-                <controller title="Driver Climate" id="DNk-lU-lMC">
+                <controller title="Driver Climate" id="DNk-lU-lMC" customClass="Temp" customModule="testWatchApp_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Driver" id="Y11-b9-MtS"/>
-                        <group width="134" height="62" alignment="left" id="40l-ij-Ma9">
+                        <label width="136" alignment="left" id="i7Y-zQ-sIh"/>
+                        <group width="134" height="42" alignment="left" id="40l-ij-Ma9">
                             <items>
-                                <button alignment="left" backgroundImage="minus" id="lzv-ra-pme"/>
-                                <label width="52" height="62" alignment="left" text="76 F" textAlignment="center" id="CXz-vx-vRO">
+                                <button alignment="left" backgroundImage="minus" id="lzv-ra-pme">
+                                    <connections>
+                                        <action selector="minus" destination="DNk-lU-lMC" id="dfX-3l-uzv"/>
+                                    </connections>
+                                </button>
+                                <label width="52" height="39" alignment="left" text="75 F" textAlignment="center" id="CXz-vx-vRO">
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
-                                <button width="38" height="39" alignment="left" backgroundImage="plus" id="afK-mb-y2s"/>
+                                <button width="38" height="39" alignment="left" backgroundImage="plus" id="afK-mb-y2s">
+                                    <connections>
+                                        <action selector="plus" destination="DNk-lU-lMC" id="BX0-hm-Rvk"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
-                        <button width="1" alignment="left" title="Set" id="Rkf-SL-UYq"/>
+                        <label width="136" alignment="left" text="Not Set" textAlignment="center" id="PL7-9k-opD"/>
                     </items>
                     <connections>
-                        <segue destination="bwn-RQ-7Du" kind="relationship" relationship="nextPage" id="qSb-AR-u1K"/>
+                        <outlet property="temp" destination="CXz-vx-vRO" id="4Li-UV-oED"/>
+                        <outlet property="tempSet" destination="PL7-9k-opD" id="JUV-pW-ET7"/>
                     </connections>
                 </controller>
             </objects>
@@ -132,27 +142,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="1659" y="-5"/>
-        </scene>
-        <!--Passenger Climate-->
-        <scene sceneID="xIB-5y-xS4">
-            <objects>
-                <controller title="Passenger Climate" id="bwn-RQ-7Du">
-                    <items>
-                        <label alignment="left" text="Front-Seat Passenger" id="w0a-GA-voA"/>
-                        <group width="134" height="62" alignment="left" id="KS5-oH-CX6">
-                            <items>
-                                <button alignment="left" backgroundImage="minus" id="geA-EZ-OCk"/>
-                                <label width="52" height="62" alignment="left" text="76 F" textAlignment="center" id="cYE-QS-Nsr">
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                </label>
-                                <button width="38" height="39" alignment="left" backgroundImage="plus" id="Llx-iI-nC2"/>
-                            </items>
-                        </group>
-                        <button width="1" alignment="left" title="Set" id="azW-tw-t9k"/>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="914" y="-10"/>
         </scene>
         <!--Arrow-->
         <scene sceneID="3fX-aM-dd4">

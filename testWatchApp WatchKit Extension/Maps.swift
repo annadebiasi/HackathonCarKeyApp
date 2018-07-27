@@ -7,7 +7,7 @@
 //  Copyright © 2018 Low, Makena (M.). All rights reserved.
 //
 
-
+import WatchConnectivity
 import WatchKit
 import Foundation
 import CoreLocation

@@ -9,13 +9,48 @@
 import UIKit
 import CoreLocation
 import CocoaMQTT
+import WatchConnectivity
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+
+class ViewController: UIViewController,WCSessionDelegate, CLLocationManagerDelegate {
+    
+    let mqttClient = CocoaMQTT(clientID: "iOS Device", host: "19.32.136.146", port: 1883)
+    
+    var session: WCSession?
+
+    var temperature: String = ""
+    
+    
+    
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+       
+        if((applicationContext["temp"]) != nil){
+            temperature = (applicationContext["temp"] as? String)!
+            mqttClient.publish("rpi/temp", withString: temperature)
+        }
+        if((applicationContext["music"]) != nil){
+            temperature = (applicationContext["music"] as? String)!
+            mqttClient.publish("rpi/temp", withString: temperature)
+        }
+        if((applicationContext["Lock Status"]) != nil){
+            temperature = (applicationContext["Lock Status"] as? String)!
+            mqttClient.publish("rpi/temp", withString: temperature)
+        }
+    }
+    
+    
+
     //var headingManager:CLLocationManager!
    // var locationManager  = CLLocationManager()
-    
+   
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (WCSession.isSupported()) {
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
+        }
 //        UserDefaults.standard.set([39.509,-124.345], forKey: "parking")
 //        // Ask for Authorisation from the User.
 //        self.locationManager.requestAlwaysAuthorization()
@@ -43,5 +78,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //    }
 
     // https://www.quora.com/How-do-I-create-a-simple-compass-iOS-app-with-Swift-2-1-using-image-view-and-accelerometer
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+    }
+
 }
 

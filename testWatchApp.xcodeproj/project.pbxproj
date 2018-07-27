@@ -27,6 +27,7 @@
 		9F90846D2107F88A0083B884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F90846C2107F88A0083B884 /* Assets.xcassets */; };
 		B4680623210A4FCB006A03B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4680622210A4FCB006A03B6 /* MapKit.framework */; };
 		B4D8D607210A32A7004F15F9 /* Maps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D8D606210A32A7004F15F9 /* Maps.swift */; };
+		B4E5A0A7210BA2F9000E374D /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E5A0A6210BA2F9000E374D /* Temp.swift */; };
 		C82AFAC091B104E2D34E85D9 /* Pods_testWatchAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCE7AE482ED71A0CCF45F8A /* Pods_testWatchAppUITests.framework */; };
 		CA9C3CD794F9429103090F6C /* Pods_testWatchApp_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C876AA2F27F1813A1DDEEE82 /* Pods_testWatchApp_WatchKit_Extension.framework */; };
 /* End PBXBuildFile section */
@@ -123,6 +124,7 @@
 		9F90846F2107F88A0083B884 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		B4680622210A4FCB006A03B6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B4D8D606210A32A7004F15F9 /* Maps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maps.swift; sourceTree = "<group>"; };
+		B4E5A0A6210BA2F9000E374D /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		C04260F0D3D91C006C862050 /* Pods-testWatchApp WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testWatchApp WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testWatchApp WatchKit Extension/Pods-testWatchApp WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		C0837502AC19C396DB40A1C8 /* Pods-testWatchApp WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testWatchApp WatchKit App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testWatchApp WatchKit App/Pods-testWatchApp WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		C80818880BEE789254F851DC /* Pods-testWatchApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testWatchApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testWatchApp/Pods-testWatchApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				9F9084662107F88A0083B884 /* InterfaceController.swift */,
 				B4D8D606210A32A7004F15F9 /* Maps.swift */,
+				B4E5A0A6210BA2F9000E374D /* Temp.swift */,
 				9F9084682107F88A0083B884 /* ExtensionDelegate.swift */,
 				9F90846A2107F88A0083B884 /* NotificationController.swift */,
 				9F90846C2107F88A0083B884 /* Assets.xcassets */,
@@ -633,6 +636,7 @@
 			files = (
 				9F90846B2107F88A0083B884 /* NotificationController.swift in Sources */,
 				9F9084692107F88A0083B884 /* ExtensionDelegate.swift in Sources */,
+				B4E5A0A7210BA2F9000E374D /* Temp.swift in Sources */,
 				B4D8D607210A32A7004F15F9 /* Maps.swift in Sources */,
 				9F9084672107F88A0083B884 /* InterfaceController.swift in Sources */,
 			);
